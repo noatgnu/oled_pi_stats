@@ -121,11 +121,11 @@ while True:
     boot_uptime_str = datetime.timedelta(seconds=float(boot_uptime))
     # Write two lines of text.
     print(boot_uptime_str)
-    draw.text((x, top), "IP: " + str(IP), font=font, fill=255)
-    draw.text((x, top + 8), str(CPU), font=font, fill=255)
-    draw.text((x, top + 16), str(MemUsage), font=font, fill=255)
-    draw.text((x, top + 25), str(Disk), font=font, fill=255)
-    draw.text((x, top + 30), str(boot_uptime_str), font=font, fill=255)
+    draw.text((x, top), "IP: " + IP, font=font, fill=255)
+    draw.text((x, top + 8), CPU, font=font, fill=255)
+    draw.text((x, top + 16), MemUsage, font=font, fill=255)
+    draw.text((x, top + 25), boot_uptime_str, font=font, fill=255)
+    #draw.text((x, top + 30), str(boot_uptime_str), font=font, fill=255)
     # Display image.
     disp.image(image)
     disp.display()
