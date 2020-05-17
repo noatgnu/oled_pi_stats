@@ -114,7 +114,8 @@ while True:
     CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
     cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'"
     MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'"
+    #cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'"
+    cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB\", $3,$2}'"
     Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
     cmd = "cat /proc/uptime"
     uptime = subprocess.check_output(cmd, shell=True).decode("utf-8")
@@ -123,9 +124,9 @@ while True:
     # Write two lines of text.
 
     draw.text((x, top), "IP: " + IP, font=font, fill=255)
-    draw.text((x, top + 8), CPU + "/Up:" + boot_uptime_str, font=font, fill=255)
+    draw.text((x, top + 8), CPU, font=font, fill=255)
     draw.text((x, top + 16), MemUsage, font=font, fill=255)
-    draw.text((x, top + 25), Disk, font=font, fill=255)
+    draw.text((x, top + 25), Disk + "/Up:" + boot_uptime_str, font=font, fill=255)
     #draw.text((x, top + 28), boot_uptime_str, font=font, fill=255)
     # Display image.
     disp.image(image)
