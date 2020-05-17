@@ -118,14 +118,14 @@ while True:
     cmd = "cat /proc/uptime"
     uptime = subprocess.check_output(cmd, shell=True).decode("utf-8")
     boot_uptime = uptime[:uptime.index(" ")]
-    boot_uptime_str = str(datetime.timedelta(seconds=float(boot_uptime)))
+    boot_uptime_str = str(datetime.timedelta(seconds=float(boot_uptime))).split(".")[0]
     # Write two lines of text.
 
     draw.text((x, top), "IP: " + IP, font=font, fill=255)
-    draw.text((x, top + 7), CPU, font=font, fill=255)
-    draw.text((x, top + 14), MemUsage, font=font, fill=255)
-    draw.text((x, top + 21), Disk, font=font, fill=255)
-    draw.text((x, top + 28), boot_uptime_str, font=font, fill=255)
+    draw.text((x, top + 8), CPU + " / Up:" + boot_uptime_str, font=font, fill=255)
+    draw.text((x, top + 16), MemUsage, font=font, fill=255)
+    draw.text((x, top + 25), Disk, font=font, fill=255)
+    #draw.text((x, top + 28), boot_uptime_str, font=font, fill=255)
     # Display image.
     disp.image(image)
     disp.display()
