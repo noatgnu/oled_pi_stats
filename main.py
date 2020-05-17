@@ -28,7 +28,8 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 import subprocess
-
+import time
+import datetime
 # Raspberry Pi pin configuration:
 RST = None  # on the PiOLED this pin isnt used
 # Note the following are only used with SPI:
@@ -114,14 +115,17 @@ while True:
     MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
     cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'"
     Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
-
+    cmd = "cat /proc/uptime"
+    uptime = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    boot_uptime = uptime[:uptime.index(" ")]
+    boot_uptime_str = datetime.timedelta(seconds=float(boot_uptime))
     # Write two lines of text.
 
     draw.text((x, top), "IP: " + str(IP), font=font, fill=255)
     draw.text((x, top + 8), str(CPU), font=font, fill=255)
     draw.text((x, top + 16), str(MemUsage), font=font, fill=255)
     draw.text((x, top + 25), str(Disk), font=font, fill=255)
-
+    draw.text((x, top + 30), str(boot_uptime_str), font=font, fill=255)
     # Display image.
     disp.image(image)
     disp.display()
