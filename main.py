@@ -30,7 +30,7 @@ from PIL import ImageFont
 import subprocess
 
 # Raspberry Pi pin configuration:
-RST = None     # on the PiOLED this pin isnt used
+RST = None  # on the PiOLED this pin isnt used
 # Note the following are only used with SPI:
 DC = 23
 SPI_PORT = 0
@@ -84,16 +84,15 @@ image = Image.new('1', (width, height))
 draw = ImageDraw.Draw(image)
 
 # Draw a black filled box to clear the image.
-draw.rectangle((0,0,width,height), outline=0, fill=0)
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
 # Draw some shapes.
 # First define some constants to allow easy resizing of shapes.
 padding = -2
 top = padding
-bottom = height-padding
+bottom = height - padding
 # Move left to right keeping track of the current x position for drawing shapes.
 x = 0
-
 
 # Load default font.
 font = ImageFont.load_default()
@@ -103,26 +102,25 @@ font = ImageFont.load_default()
 # font = ImageFont.truetype('Minecraftia.ttf', 8)
 
 while True:
-
     # Draw a black filled box to clear the image.
-    draw.rectangle((0,0,width,height), outline=0, fill=0)
+    draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     # Shell scripts for system monitoring from here : https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
     cmd = "hostname -I | cut -d\' \' -f1"
-    IP = subprocess.check_output(cmd, shell = True )
+    IP = subprocess.check_output(cmd, shell=True).decode("utf-8")
     cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
-    CPU = subprocess.check_output(cmd, shell = True )
+    CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
     cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'"
-    MemUsage = subprocess.check_output(cmd, shell = True )
+    MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
     cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'"
-    Disk = subprocess.check_output(cmd, shell = True )
+    Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
     # Write two lines of text.
 
-    draw.text((x, top),       "IP: " + str(IP),  font=font, fill=255)
-    draw.text((x, top+8),     str(CPU), font=font, fill=255)
-    draw.text((x, top+16),    str(MemUsage),  font=font, fill=255)
-    draw.text((x, top+25),    str(Disk),  font=font, fill=255)
+    draw.text((x, top), "IP: " + str(IP), font=font, fill=255)
+    draw.text((x, top + 8), str(CPU), font=font, fill=255)
+    draw.text((x, top + 16), str(MemUsage), font=font, fill=255)
+    draw.text((x, top + 25), str(Disk), font=font, fill=255)
 
     # Display image.
     disp.image(image)
