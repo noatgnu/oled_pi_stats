@@ -100,7 +100,7 @@ x = 0
 
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-font = ImageFont.truetype('Roboto-Regular.ttf', 10)
+font = ImageFont.truetype('Roboto-Regular.ttf', 9)
 
 while True:
     # Draw a black filled box to clear the image.
