@@ -120,12 +120,12 @@ while True:
     boot_uptime = uptime[:uptime.index(" ")]
     boot_uptime_str = str(datetime.timedelta(seconds=float(boot_uptime)))
     # Write two lines of text.
-    
+
     draw.text((x, top), "IP: " + IP, font=font, fill=255)
-    draw.text((x, top + 6), CPU, font=font, fill=255)
+    draw.text((x, top + 7), CPU, font=font, fill=255)
     draw.text((x, top + 14), MemUsage, font=font, fill=255)
-    draw.text((x, top + 23), boot_uptime_str, font=font, fill=255)
-    #draw.text((x, top + 30), str(boot_uptime_str), font=font, fill=255)
+    draw.text((x, top + 21), Disk, font=font, fill=255)
+    draw.text((x, top + 28), boot_uptime_str, font=font, fill=255)
     # Display image.
     disp.image(image)
     disp.display()
