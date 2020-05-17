@@ -1,3 +1,13 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          myservice
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Put a short description of the service here
+# Description:       Put a long description of the service here
+### END INIT INFO
 DIR=/home/pi/oled_pi_stats
 DAEMON=$DIR/main.py
 DAEMON_NAME=oled_status
