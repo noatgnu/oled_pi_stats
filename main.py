@@ -118,7 +118,7 @@ while True:
     cmd = "cat /proc/uptime"
     uptime = subprocess.check_output(cmd, shell=True).decode("utf-8")
     boot_uptime = uptime[:uptime.index(" ")]
-    boot_uptime_str = datetime.timedelta(seconds=float(boot_uptime))
+    boot_uptime_str = str(datetime.timedelta(seconds=float(boot_uptime)))
     # Write two lines of text.
     print(boot_uptime_str)
     draw.text((x, top), "IP: " + IP, font=font, fill=255)
